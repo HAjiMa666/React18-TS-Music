@@ -1,14 +1,24 @@
-/*
- * @Author: czx
- * @Date: 2022-11-28 20:37:18
- * @LastEditTime: 2022-11-28 20:37:29
- * @LastEditors: czx
- * @Description:
- */
-import React from 'react'
+import React, { memo } from 'react'
+import type { FC, ReactNode } from 'react'
 
-const Home = () => {
-  return <div>Home</div>
+import { useAppSelector } from '@/store/hooks'
+import { shallowEqual } from 'react-redux'
+interface IProps {
+  children?: ReactNode
 }
 
-export default Home
+const Home: FC<IProps> = () => {
+  const { counts } = useAppSelector(
+    (state) => ({
+      counts: state.count
+    }),
+    shallowEqual
+  )
+  return (
+    <div>
+      <span>{`计数： ${counts.sum}`}</span>
+    </div>
+  )
+}
+
+export default memo(Home)
