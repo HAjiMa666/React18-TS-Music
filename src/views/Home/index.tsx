@@ -7,7 +7,7 @@ interface IProps {
   children?: ReactNode
 }
 
-const Home: FC<IProps> = () => {
+const Home: FC<IProps> = (props) => {
   const { counts } = useAppSelector(
     (state) => ({
       counts: state.count
