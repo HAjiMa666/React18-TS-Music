@@ -1,10 +1,3 @@
-/*
- * @Author: czx
- * @Date: 2022-11-29 10:25:08
- * @LastEditTime: 2022-11-29 14:17:14
- * @LastEditors: czx
- * @Description:
- */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../index'
 

@@ -1,12 +1,3 @@
-const { off } = require('process')
-
-/*
- * @Author: czx
- * @Date: 2022-11-28 18:46:35
- * @LastEditTime: 2022-11-28 19:42:23
- * @LastEditors: czx
- * @Description:
- */
 module.exports = {
   env: {
     browser: true,
