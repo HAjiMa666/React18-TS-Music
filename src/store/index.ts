@@ -8,10 +8,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import countReducer from './modules/count'
+import recommendReducer from '@/views/Discover/c-views/Recommend/store/recommend'
 
 const store = configureStore({
   reducer: {
-    count: countReducer
+    count: countReducer,
+    recommend: recommendReducer
   }
 })
 
