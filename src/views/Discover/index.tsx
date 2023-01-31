@@ -38,7 +38,11 @@ const Discover: FC<IProps> = (props) => {
   )
   return (
     <DiscoverStyle>
-      <Menu mode="horizontal" items={items} />
+      <Menu
+        mode="horizontal"
+        items={items}
+        defaultSelectedKeys={['/discover/recommend']}
+      />
       <Suspense fallback="">
         <Outlet />
       </Suspense>

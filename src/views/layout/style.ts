@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
-const LayoutStyle = styled.div``
+const LayoutStyle = styled.div`
+  user-select: none;
+`
 
 const Title = styled.h1`
   text-align: center;
