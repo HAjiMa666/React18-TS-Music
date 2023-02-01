@@ -3,6 +3,7 @@ import type { FC, ReactNode } from 'react'
 import HotRecommendWrapper from './style'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { fetchHotRecommend } from '@/views/Discover/c-views/Recommend/store/recommend'
+import ModelHead from '@/components/modelHead'
 
 interface IProps {
   children?: ReactNode
@@ -17,7 +18,11 @@ const HotRecommend: FC<IProps> = () => {
     dispatch(fetchHotRecommend())
   }, [])
 
-  return <HotRecommendWrapper>HotRecommend</HotRecommendWrapper>
+  return (
+    <HotRecommendWrapper>
+      <ModelHead title={'推荐歌单'} link={''} />
+    </HotRecommendWrapper>
+  )
 }
 
 export default memo(HotRecommend)

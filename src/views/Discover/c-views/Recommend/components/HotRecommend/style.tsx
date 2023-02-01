@@ -5,7 +5,6 @@ const HotRecommendWrapper = styled.div`
   margin: 12px 0px;
   padding: 12px 0px;
   border-radius: 4px;
-  background-color: #eeeeee;
 `
 
 export { HotRecommendWrapper as default }
