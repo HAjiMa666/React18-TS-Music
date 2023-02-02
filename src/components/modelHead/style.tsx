@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const ModelHeadWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
   .title {
     color: #fff;
     font-size: 18px;

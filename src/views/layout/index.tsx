@@ -1,6 +1,7 @@
 import React, { memo, Suspense, useEffect, useState } from 'react'
 import LayoutStyle, { Title } from './style'
-import { Layout, Menu } from 'antd'
+import { ConfigProvider, Layout, Menu, theme } from 'antd'
+import { CustomerServiceOutlined } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import navData from '@/assets/homepageNav.json'
 
@@ -16,33 +17,46 @@ const Index = memo(() => {
     navigate('/discover')
   }, [])
   return (
-    <LayoutStyle>
-      <Layout style={{ minHeight: '100vh' }}>
-        <Sider
-          collapsible
-          collapsed={collapsed}
-          onCollapse={(isCollapse) => {
-            setCollapsed(isCollapse)
-          }}
-        >
-          <Title>网易云音乐</Title>
-          <Menu
-            theme="dark"
-            defaultSelectedKeys={['/discover']}
-            items={navData}
-            onClick={(obj) => {
-              console.log('点击的对象', obj)
-              navigate(obj.key)
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#ff0000'
+        },
+        algorithm: theme.darkAlgorithm
+      }}
+    >
+      <LayoutStyle>
+        <Layout style={{ minHeight: '100vh' }}>
+          <Sider
+            collapsible
+            collapsed={collapsed}
+            onCollapse={(isCollapse) => {
+              setCollapsed(isCollapse)
             }}
-          />
-        </Sider>
-        <Content>
-          <Suspense fallback="">
-            <Outlet />
-          </Suspense>
-        </Content>
-      </Layout>
-    </LayoutStyle>
+            theme={'light'}
+          >
+            <Title>
+              {collapsed ? <CustomerServiceOutlined /> : '网易云音乐'}
+            </Title>
+            <Menu
+              theme="light"
+              defaultSelectedKeys={['/discover']}
+              items={navData}
+              onClick={(obj) => {
+                console.log('点击的对象', obj)
+                navigate(obj.key)
+              }}
+            />
+          </Sider>
+
+          <Content className="container">
+            <Suspense fallback="">
+              <Outlet />
+            </Suspense>
+          </Content>
+        </Layout>
+      </LayoutStyle>
+    </ConfigProvider>
   )
 })
 

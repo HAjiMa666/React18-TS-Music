@@ -4,6 +4,8 @@ import HotRecommendWrapper from './style'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { fetchHotRecommend } from '@/views/Discover/c-views/Recommend/store/recommend'
 import ModelHead from '@/components/modelHead'
+import SongCard from '@/components/songCard'
+import { formatNum } from '@/utils/tools'
 
 interface IProps {
   children?: ReactNode
@@ -21,6 +23,18 @@ const HotRecommend: FC<IProps> = () => {
   return (
     <HotRecommendWrapper>
       <ModelHead title={'推荐歌单'} link={''} />
+      <div className="cards">
+        {hotRecommend.map((item) => {
+          return (
+            <SongCard
+              key={item.id}
+              description={item.name}
+              imgUrl={item.picUrl}
+              playCount={formatNum(item.playCount)}
+            />
+          )
+        })}
+      </div>
     </HotRecommendWrapper>
   )
 }

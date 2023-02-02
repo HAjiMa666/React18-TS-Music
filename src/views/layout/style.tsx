@@ -2,6 +2,10 @@ import styled from 'styled-components'
 
 const LayoutStyle = styled.div`
   user-select: none;
+  height: auto;
+  .container {
+    background-color: #141414;
+  }
 `
 
 const Title = styled.h1`

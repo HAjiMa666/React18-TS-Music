@@ -6,6 +6,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useAppSelector } from '@/store/hooks'
 import { shallowEqual } from 'react-redux'
 import { DiscoverStyle } from './style'
+import { useToken } from 'antd/es/theme/internal'
 interface IProps {
   children?: ReactNode
 }
@@ -30,12 +31,6 @@ const items: MenuProps['items'] = [
 ]
 
 const Discover: FC<IProps> = (props) => {
-  const { counts } = useAppSelector(
-    (state) => ({
-      counts: state.count
-    }),
-    shallowEqual
-  )
   return (
     <DiscoverStyle>
       <Menu
