@@ -2,7 +2,10 @@ import React, { memo, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
 import HotRecommendWrapper from './style'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { fetchHotRecommend } from '@/views/Discover/c-views/Recommend/store/recommend'
+import {
+  fetchHotRecommend,
+  fetchHotRecommendDetails
+} from '@/views/Discover/c-views/Recommend/store/recommend'
 import ModelHead from '@/components/modelHead'
 import SongCard from '@/components/songCard'
 import { formatNum } from '@/utils/tools'
@@ -31,6 +34,9 @@ const HotRecommend: FC<IProps> = () => {
               description={item.name}
               imgUrl={item.picUrl}
               playCount={formatNum(item.playCount)}
+              onClick={() => {
+                dispatch(fetchHotRecommendDetails({ id: item.id }))
+              }}
             />
           )
         })}

@@ -6,5 +6,7 @@
  * @Description:
  */
 export const MOCK_URL = 'https://mock.apifox.cn/m1/1036977-0-default'
-export const BASE_URL = 'http://codercba.com:9002'
+// export const BASE_URL = 'http://codercba.com:9002'
+// export const BASE_URL = 'http://121.43.233.69:3000'
+export const BASE_URL = 'http://localhost:3000'
 export const TIME_OUT = 1000
