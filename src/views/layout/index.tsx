@@ -4,6 +4,7 @@ import { ConfigProvider, Layout, Menu, theme } from 'antd'
 import { CustomerServiceOutlined } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import navData from '@/assets/homepageNav.json'
+import MusicPlayer from '@/components/musicPlayer'
 
 const { Sider, Content } = Layout
 
@@ -26,7 +27,7 @@ const Index = memo(() => {
       }}
     >
       <LayoutStyle>
-        <Layout style={{ minHeight: '100vh' }}>
+        <Layout className="antdLayout">
           <Sider
             collapsible
             collapsed={collapsed}
@@ -55,6 +56,7 @@ const Index = memo(() => {
             </Suspense>
           </Content>
         </Layout>
+        <MusicPlayer />
       </LayoutStyle>
     </ConfigProvider>
   )

@@ -9,16 +9,28 @@ import {
 import ModelHead from '@/components/modelHead'
 import SongCard from '@/components/songCard'
 import { formatNum } from '@/utils/tools'
-
+import { changeDetailsOpen } from '@/store/common'
+import SongListDetails from '@/components/songListDetails'
+import { shallowEqual } from 'react-redux'
 interface IProps {
   children?: ReactNode
 }
 
 const HotRecommend: FC<IProps> = () => {
   const dispatch = useAppDispatch()
-  const { hotRecommend } = useAppSelector((state) => ({
-    hotRecommend: state.recommend.hotRecommend
-  }))
+  const { hotRecommend, hotRecommendSongDetails } = useAppSelector(
+    (state) => ({
+      hotRecommend: state.recommend.hotRecommend,
+      hotRecommendSongDetails: state.recommend.hotRecommendDetails
+    }),
+    shallowEqual
+  )
+  const { songListDetailsOpen } = useAppSelector(
+    (state) => ({
+      songListDetailsOpen: state.common.songListDetailsOpen
+    }),
+    shallowEqual
+  )
   useEffect(() => {
     dispatch(fetchHotRecommend())
   }, [])
@@ -36,11 +48,19 @@ const HotRecommend: FC<IProps> = () => {
               playCount={formatNum(item.playCount)}
               onClick={() => {
                 dispatch(fetchHotRecommendDetails({ id: item.id }))
+                dispatch(changeDetailsOpen())
               }}
             />
           )
         })}
       </div>
+      <SongListDetails
+        open={songListDetailsOpen}
+        changeOpen={() => {
+          dispatch(changeDetailsOpen())
+        }}
+        dataSource={hotRecommendSongDetails}
+      />
     </HotRecommendWrapper>
   )
 }

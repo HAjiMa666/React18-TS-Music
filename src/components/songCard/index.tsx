@@ -14,13 +14,11 @@ interface IProps {
 
 const SongCard: FC<IProps> = (props) => {
   const { imgUrl, description, playCount, onClick } = props
-  const [open, setOpen] = useState(false)
   return (
     <SongCardWrapper className="songCard">
       <div
         className="container"
         onClick={() => {
-          setOpen(true)
           onClick()
         }}
       >
@@ -33,15 +31,6 @@ const SongCard: FC<IProps> = (props) => {
         </Box>
         <div className="description">{description}</div>
       </div>
-      <Drawer
-        title="测试Drawer"
-        placement="right"
-        open={open}
-        onClose={() => {
-          setOpen(false)
-        }}
-        getContainer={() => document.querySelector('.songCard') as HTMLElement}
-      ></Drawer>
     </SongCardWrapper>
   )
 }

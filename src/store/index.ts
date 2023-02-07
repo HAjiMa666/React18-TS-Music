@@ -7,13 +7,13 @@
  */
 import { configureStore } from '@reduxjs/toolkit'
 
-import countReducer from './modules/count'
+import commonReducer from './common'
 import recommendReducer from '@/views/Discover/c-views/Recommend/store/recommend'
 
 const store = configureStore({
   reducer: {
-    count: countReducer,
-    recommend: recommendReducer
+    recommend: recommendReducer,
+    common: commonReducer
   }
 })
 

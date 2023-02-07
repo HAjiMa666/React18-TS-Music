@@ -22,7 +22,7 @@ export const fetchHotRecommendDetails = createAsyncThunk(
   async (params: SongPlayListParams) => {
     console.log(params)
     const res = await GETSongPlayListDetails(params)
-    return res
+    return res.songs
   }
 )
 
