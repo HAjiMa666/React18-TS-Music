@@ -1,10 +1,11 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import type { FC, ReactNode } from 'react'
 import HotRecommendWrapper from './style'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import {
   fetchHotRecommend,
-  fetchHotRecommendDetails
+  fetchAllSongs,
+  fetchSongListDetails
 } from '@/views/Discover/c-views/Recommend/store/recommend'
 import ModelHead from '@/components/modelHead'
 import SongCard from '@/components/songCard'
@@ -18,10 +19,11 @@ interface IProps {
 
 const HotRecommend: FC<IProps> = () => {
   const dispatch = useAppDispatch()
-  const { hotRecommend, hotRecommendSongDetails } = useAppSelector(
+  const { hotRecommend, allSongs, songListDetails } = useAppSelector(
     (state) => ({
       hotRecommend: state.recommend.hotRecommend,
-      hotRecommendSongDetails: state.recommend.hotRecommendDetails
+      allSongs: state.recommend.allSongs,
+      songListDetails: state.recommend.songListDetails
     }),
     shallowEqual
   )
@@ -47,7 +49,8 @@ const HotRecommend: FC<IProps> = () => {
               imgUrl={item.picUrl}
               playCount={formatNum(item.playCount)}
               onClick={() => {
-                dispatch(fetchHotRecommendDetails({ id: item.id }))
+                dispatch(fetchAllSongs({ id: item.id }))
+                dispatch(fetchSongListDetails({ id: item.id }))
                 dispatch(changeDetailsOpen())
               }}
             />
@@ -59,7 +62,8 @@ const HotRecommend: FC<IProps> = () => {
         changeOpen={() => {
           dispatch(changeDetailsOpen())
         }}
-        dataSource={hotRecommendSongDetails}
+        allSongs={allSongs}
+        songListDetails={songListDetails}
       />
     </HotRecommendWrapper>
   )
