@@ -6,18 +6,18 @@ import {
   ListInfo,
   SongWrapper
 } from './style'
-import { SongListDetails } from '@/views/Discover/c-views/Recommend/types/recommend'
-import { Drawer } from 'antd'
+import { SongListDetails } from '@/types/recommend'
+import { Drawer, Typography } from 'antd'
+import { formatIndex } from '@/utils/tools'
+import { useAppDispatch } from '@/store/hooks'
+import { fetchSongUrl } from '@/store/common'
 
-type ContainerType = Element | DocumentFragment
-type GetContainer = string | ContainerType | (() => ContainerType) | false
 interface IProps {
   children?: ReactNode
   open: boolean
   changeOpen?: () => void
   allSongs: any
   songListDetails: SongListDetails | undefined
-  getContainer?: GetContainer | undefined
 }
 interface SongListHeadProps {
   cover: string | undefined
@@ -27,6 +27,7 @@ interface SongListHeadProps {
 interface SongProps {
   name: string
   id: number
+  index?: number
 }
 
 const SongListHead: FC<SongListHeadProps> = memo((props) => {
@@ -48,12 +49,29 @@ const SongListHead: FC<SongListHeadProps> = memo((props) => {
 })
 
 const Song: FC<SongProps> = memo((props) => {
-  const { name } = props
-  return <SongWrapper>{name}</SongWrapper>
+  const dispatch = useAppDispatch()
+  const { name, index, id } = props
+  if (index)
+    return (
+      <SongWrapper
+        onClick={() => {
+          dispatch(fetchSongUrl({ id }))
+        }}
+      >
+        <span className="index">{formatIndex(index)}</span>
+
+        <div className="name">
+          <Typography.Text ellipsis={true} title={name}>
+            {name}
+          </Typography.Text>
+        </div>
+      </SongWrapper>
+    )
+  else return <SongWrapper>{name}</SongWrapper>
 })
 
 const SongListDetailsCpn: FC<IProps> = (props) => {
-  const { open, changeOpen, allSongs, getContainer, songListDetails } = props
+  const { open, changeOpen, allSongs, songListDetails } = props
   return (
     <SongDetailsWrapper className="songDetails">
       <Drawer
@@ -74,8 +92,15 @@ const SongListDetailsCpn: FC<IProps> = (props) => {
           document.querySelector('.songDetails') as HTMLDivElement
         }
       >
-        {allSongs.map((item: any) => {
-          return <Song name={item.name} id={item.id} key={item.id} />
+        {allSongs.map((item: any, index: number) => {
+          return (
+            <Song
+              name={item.name}
+              id={item.id}
+              key={item.id}
+              index={index + 1}
+            />
+          )
         })}
       </Drawer>
     </SongDetailsWrapper>

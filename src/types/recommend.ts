@@ -1,3 +1,4 @@
+//热门推荐的轮播图信息
 interface Banner {
   imageUrl: string
   targetId: number
@@ -26,7 +27,7 @@ interface Banner {
   scm: string
   bannerBizType: string
 }
-
+//热门推荐的歌单
 interface HotRecommends {
   id: number
   type: number
@@ -41,6 +42,7 @@ interface HotRecommends {
   alg: string
 }
 
+// 歌单订阅者信息
 interface Subscriber {
   defaultAvatar: boolean
   province: number
@@ -74,7 +76,7 @@ interface Subscriber {
   backgroundImgIdStr: string
   avatarImgId_str: string
 }
-
+//歌单创建者信息
 interface Creator {
   defaultAvatar: boolean
   province: number
@@ -108,7 +110,7 @@ interface Creator {
   backgroundImgIdStr: string
   avatarImgId_str: string
 }
-
+// 歌单详情
 interface SongListDetails {
   id: number
   name: string

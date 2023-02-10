@@ -2,15 +2,15 @@ import React, { memo, useEffect, useState } from 'react'
 import type { FC, ReactNode } from 'react'
 import HotRecommendWrapper from './style'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import {
-  fetchHotRecommend,
-  fetchAllSongs,
-  fetchSongListDetails
-} from '@/views/Discover/c-views/Recommend/store/recommend'
+import { fetchHotRecommend } from '@/views/Discover/c-views/Recommend/store/recommend'
 import ModelHead from '@/components/modelHead'
 import SongCard from '@/components/songCard'
 import { formatNum } from '@/utils/tools'
-import { changeDetailsOpen } from '@/store/common'
+import {
+  changeDetailsOpen,
+  fetchAllSongs,
+  fetchSongListDetails
+} from '@/store/common'
 import SongListDetails from '@/components/songListDetails'
 import { shallowEqual } from 'react-redux'
 interface IProps {
@@ -19,20 +19,16 @@ interface IProps {
 
 const HotRecommend: FC<IProps> = () => {
   const dispatch = useAppDispatch()
-  const { hotRecommend, allSongs, songListDetails } = useAppSelector(
-    (state) => ({
-      hotRecommend: state.recommend.hotRecommend,
-      allSongs: state.recommend.allSongs,
-      songListDetails: state.recommend.songListDetails
-    }),
-    shallowEqual
-  )
-  const { songListDetailsOpen } = useAppSelector(
-    (state) => ({
-      songListDetailsOpen: state.common.songListDetailsOpen
-    }),
-    shallowEqual
-  )
+  const { hotRecommend, allSongs, songListDetails, songListDetailsOpen } =
+    useAppSelector(
+      (state) => ({
+        hotRecommend: state.recommend.hotRecommend,
+        allSongs: state.common.allSongs,
+        songListDetails: state.common.songListDetails,
+        songListDetailsOpen: state.common.songListDetailsOpen
+      }),
+      shallowEqual
+    )
   useEffect(() => {
     dispatch(fetchHotRecommend())
   }, [])

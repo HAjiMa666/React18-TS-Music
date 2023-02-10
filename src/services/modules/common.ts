@@ -11,7 +11,7 @@ export interface SongPlayListParams {
 }
 export interface SongUrlParams {
   id: number
-  level: 'standard' | 'higher' | 'exhigh' | 'lossless' | 'hires'
+  level?: 'standard' | 'higher' | 'exhigh' | 'lossless' | 'hires'
 }
 
 // 获取歌单中所有歌曲
@@ -31,7 +31,7 @@ export function GETSongPlayListDetails(params: SongPlayListParams) {
 
 // /song/url 获取歌曲URL
 export function GETSongUrl(params: SongUrlParams) {
-  const { id, level } = params
+  const { id, level = 'standard' } = params
   return zxRequest.get({
     url: `/song/url/v1?id=${id}&level=${level}`
   })
