@@ -4,7 +4,7 @@ import { ConfigProvider, Layout, Menu, theme } from 'antd'
 import { CustomerServiceOutlined } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import navData from '@/assets/homepageNav.json'
-import MusicPlayer from '@/components/musicPlayer'
+import MusicPlayer from '@/views/musicPlayer'
 
 const { Sider, Content } = Layout
 
