@@ -21,7 +21,6 @@ import {
   Stop
 } from '@/assets/icons'
 import { shallowEqual } from 'react-redux'
-import { setMusicPlayerRef } from '@/store/common'
 
 const MusicPlayer: FC<IProps> = () => {
   const dispatch = useAppDispatch()
@@ -36,8 +35,8 @@ const MusicPlayer: FC<IProps> = () => {
   )
   const musicPlayerRef = useRef<HTMLAudioElement>(null)
   useEffect(() => {
-    dispatch(setMusicPlayerRef(musicPlayerRef))
-  }, [])
+    if (musicPlayerRef.current?.src) musicPlayerRef.current.play()
+  }, [songData])
   const [currentSongPlayTime, setSongPlayTime] = useState(0)
   const currentSongInfo = useMemo(() => {
     return allSongs.find((item) => item.id === songData[0]?.id)
