@@ -82,6 +82,41 @@ const MusicPlayerWrapper = styled.div`
       }
     }
   }
+
+  .audioProgress {
+    /* 音乐播放器进度条样式定制 */
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    z-index: 9999;
+    .ant-slider {
+      margin: 0px;
+      height: 4px;
+
+      &:hover {
+        .ant-slider-handle {
+          display: block;
+        }
+      }
+    }
+
+    .ant-slider-track {
+      background-color: #fff;
+    }
+
+    .ant-slider-handle {
+      display: none;
+
+      &::after {
+        box-shadow: 0 0 0 2px #fff;
+      }
+
+      &:hover::after {
+        box-shadow: 0 0 0 4px #fff;
+      }
+    }
+  }
 `
 
 export { MusicPlayerWrapper }

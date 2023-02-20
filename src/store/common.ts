@@ -14,13 +14,15 @@ interface InitialStateProps {
   currentSong: any
   allSongs: Song[]
   songListDetails: SongListDetails | undefined
+  musicPlayerRef: HTMLAudioElement | undefined
 }
 
 const initialState: InitialStateProps = {
   songListDetailsOpen: false,
   currentSong: '',
   allSongs: [],
-  songListDetails: undefined
+  songListDetails: undefined,
+  musicPlayerRef: undefined
 }
 
 export const fetchAllSongs = createAsyncThunk(
@@ -53,6 +55,9 @@ const CommonStore = createSlice({
   reducers: {
     changeDetailsOpen: (state) => {
       state.songListDetailsOpen = !state.songListDetailsOpen
+    },
+    setMusicPlayerRef: (state, action) => {
+      state.musicPlayerRef = action.payload
     }
   },
   extraReducers(builder) {
@@ -69,6 +74,6 @@ const CommonStore = createSlice({
   }
 })
 
-export const { changeDetailsOpen } = CommonStore.actions
+export const { changeDetailsOpen, setMusicPlayerRef } = CommonStore.actions
 
 export default CommonStore.reducer
