@@ -1,0 +1,30 @@
+[
+  {
+    "key": "/discover",
+    "icon": "",
+    "label": "发现音乐",
+    "url": "/home",
+    "children": ""
+  },
+  {
+    "key":"/personalInfo",
+    "icon":"",
+    "label":"个人中心",
+    "url":"",
+    "children":""
+  },
+  {
+    "key":"/myMusic",
+    "icon":"",
+    "label":"我的音乐",
+    "url":"",
+    "children":""
+  },
+  {
+    "key": "/attention",
+    "icon": "",
+    "label": "关注",
+    "url": "",
+    "children": ""
+  }
+]

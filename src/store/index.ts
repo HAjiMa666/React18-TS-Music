@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import countReducer from './modules/count'
+import commonReducer from './common'
+import recommendReducer from '@/views/Discover/c-views/Recommend/store/recommend'
+import musicPlayerReducer from '@/views/musicPlayer/store'
 
 const store = configureStore({
   reducer: {
-    count: countReducer
+    recommend: recommendReducer,
+    common: commonReducer,
+    musicPlayer: musicPlayerReducer
   }
 })
 
