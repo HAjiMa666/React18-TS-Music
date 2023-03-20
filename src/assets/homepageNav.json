@@ -1,10 +1,10 @@
 [
   {
-    "key":"/discover",
-    "icon":"",
-    "label":"发现音乐",
-    "url":"/home",
-    "children":""
+    "key": "/discover",
+    "icon": "",
+    "label": "发现音乐",
+    "url": "/home",
+    "children": ""
   },
   {
     "key":"/personalInfo",
@@ -21,10 +21,10 @@
     "children":""
   },
   {
-    "key":"/attention",
-    "icon":"",
-    "label":"关注",
-    "url":"",
-    "children":""
+    "key": "/attention",
+    "icon": "",
+    "label": "关注",
+    "url": "",
+    "children": ""
   }
 ]
