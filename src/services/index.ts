@@ -7,6 +7,7 @@
  */
 import ZXRequest from './request'
 import { BASE_URL, MOCK_URL, TIME_OUT } from './config'
+import axios from 'axios'
 
 const zxRequest = new ZXRequest({
   baseURL: BASE_URL,

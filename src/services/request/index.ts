@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { AxiosInstance } from 'axios'
-import type { ZXAxiosRequestConfig } from './type'
+import type { ZXAxiosRequestConfig, ZXRequestConfig } from './type'
 
 class ZXRequest {
   instance: AxiosInstance
@@ -41,7 +41,7 @@ class ZXRequest {
   }
 
   //TODO 封装request请求
-  request<T = any>(config: ZXAxiosRequestConfig<T>) {
+  request<T = any>(config: ZXRequestConfig<T>) {
     if (config.interceptors?.requestSuccessFn) {
       config = config.interceptors?.requestSuccessFn(config)
     }
@@ -61,12 +61,12 @@ class ZXRequest {
   }
 
   //TODO 封装get请求
-  get<T = any>(config: ZXAxiosRequestConfig<T>) {
+  get<T = any>(config: ZXRequestConfig<T>) {
     return this.request({ ...config, method: 'get' })
   }
 
   //TODO 封装post请求
-  post<T = any>(config: ZXAxiosRequestConfig) {
+  post<T = any>(config: ZXRequestConfig) {
     return this.request({ ...config, method: 'post' })
   }
 }

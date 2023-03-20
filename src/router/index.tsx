@@ -9,6 +9,7 @@ const MusicList = lazy(() => import('@/views/Discover/c-views/MusicList'))
 const NewAlbum = lazy(() => import('@/views/Discover/c-views/NewAlbum'))
 const MyMusic = lazy(() => import('@/views/MyMusic'))
 const Attention = lazy(() => import('@/views/Attention'))
+const PersonalInfo = lazy(() => import('@/views/PersonalInfo'))
 
 const routes: RouteObject[] = [
   {
@@ -26,6 +27,7 @@ const routes: RouteObject[] = [
           { path: '/discover/newAlbum', element: <NewAlbum /> }
         ]
       },
+      { path: '/personalInfo', element: <PersonalInfo /> },
       { path: '/myMusic', element: <MyMusic /> },
       { path: '/attention', element: <Attention /> }
     ]
