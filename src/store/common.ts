@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {
   GETSongUrl,
   GETSongPlayListAllSongs,
@@ -9,18 +9,21 @@ import {
 import type { SongUrlParams } from '@/services/modules/common'
 import { SongListDetails } from '@/types/recommend'
 import { Song } from '@/types/common'
+import { checkLoginStatus } from '@/views/PersonalInfo/services/personInfo'
 interface InitialStateProps {
   songListDetailsOpen: boolean
   currentSong: any
   allSongs: Song[]
   songListDetails: SongListDetails | undefined
+  loginStatus: any
 }
 
 const initialState: InitialStateProps = {
   songListDetailsOpen: false,
   currentSong: '',
   allSongs: [],
-  songListDetails: undefined
+  songListDetails: undefined,
+  loginStatus: ''
 }
 
 export const fetchAllSongs = createAsyncThunk(
@@ -47,6 +50,14 @@ export const fetchSongUrl = createAsyncThunk(
   }
 )
 
+export const fetchLoginStatus = createAsyncThunk(
+  'login/status',
+  async (cookie: string) => {
+    const res = await checkLoginStatus(cookie)
+    return res.data
+  }
+)
+
 const CommonStore = createSlice({
   name: 'commonData',
   initialState: initialState,
@@ -65,6 +76,9 @@ const CommonStore = createSlice({
       })
       .addCase(fetchSongListDetails.fulfilled, (state, action) => {
         state.songListDetails = action.payload
+      })
+      .addCase(fetchLoginStatus.fulfilled, (state, action) => {
+        state.loginStatus = action.payload
       })
   }
 })
