@@ -8,11 +8,11 @@ const LayoutStyle = styled.div`
 
   .header {
     height: 50px;
-    background-color: purple;
     padding-inline: 0px;
     display: flex;
+    background-color: #141414;
     justify-content: space-between;
-
+    border-bottom: 1px solid #363636;
     .options {
       margin-right: 64px;
     }

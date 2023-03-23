@@ -1,6 +1,16 @@
 import React, { memo, useState, useEffect } from 'react'
 import type { FC, ReactNode } from 'react'
-import { Button, Modal, Form, Input, Tabs, message, Avatar } from 'antd'
+import {
+  Button,
+  Modal,
+  Form,
+  Input,
+  Tabs,
+  message,
+  Avatar,
+  Dropdown
+} from 'antd'
+import type { MenuProps } from 'antd'
 import { LoginModalWrapper } from './style'
 import {
   getQRCodeKey,
@@ -10,6 +20,8 @@ import {
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { fetchLoginStatus } from '@/store/common'
 import { QRCodeSVG } from 'qrcode.react'
+import { useNavigate } from 'react-router-dom'
+import { useCookie } from '@/hooks'
 interface IProps {
   children?: ReactNode
   getLoginStatus: () => void
@@ -21,9 +33,30 @@ const PersonalInfo: FC<IProps> = (props) => {
   const [qrUrl, setQRUrl] = useState('')
   const { getLoginStatus } = props
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const cookie = useCookie()
   const { loginStatus } = useAppSelector((state) => ({
     loginStatus: state.common.loginStatus
   }))
+  const dropDownItems: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <Button
+          onClick={() => {
+            navigate('/personalInfo')
+          }}
+        >
+          个人中心
+        </Button>
+      )
+    },
+    {
+      key: '2',
+      label: <Button>退出登录</Button>
+    }
+  ]
+
   const handleQRCodeUrl = () => {
     getQRCodeKey().then((res) => {
       const key = res.data.unikey
@@ -38,6 +71,11 @@ const PersonalInfo: FC<IProps> = (props) => {
   useEffect(() => {
     handleQRCodeUrl()
   }, [])
+
+  useEffect(() => {
+    if (!cookie) return
+    dispatch(fetchLoginStatus(cookie))
+  }, [cookie])
 
   useEffect(() => {
     if (!loginModal) return
@@ -62,16 +100,21 @@ const PersonalInfo: FC<IProps> = (props) => {
   return (
     <LoginModalWrapper className="loginModalWrapper">
       <div className="loginInfo">
-        <Avatar
-          onClick={() => {
-            if (loginStatus.profile) return
-            setLoginModal(true)
-          }}
-          size="large"
-          src={loginStatus.profile?.avatarUrl}
+        <Dropdown
+          menu={{ items: dropDownItems }}
+          disabled={!loginStatus.profile?.avatarUrl}
         >
-          未登录
-        </Avatar>
+          <Avatar
+            onClick={() => {
+              if (loginStatus.profile) return
+              setLoginModal(true)
+            }}
+            size="large"
+            src={loginStatus.profile?.avatarUrl}
+          >
+            未登录
+          </Avatar>
+        </Dropdown>
       </div>
 
       <Modal
@@ -120,7 +163,7 @@ const PersonalInfo: FC<IProps> = (props) => {
                   // onFinishFailed={onFinishFailed}
                 >
                   <Form.Item
-                    label="用户名"
+                    label="手机号"
                     name="username"
                     rules={[{ required: true, message: '请输入你的用户名!' }]}
                   >

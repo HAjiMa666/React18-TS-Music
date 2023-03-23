@@ -7,13 +7,6 @@
     "children": ""
   },
   {
-    "key":"/personalInfo",
-    "icon":"",
-    "label":"个人中心",
-    "url":"",
-    "children":""
-  },
-  {
     "key":"/myMusic",
     "icon":"",
     "label":"我的音乐",
