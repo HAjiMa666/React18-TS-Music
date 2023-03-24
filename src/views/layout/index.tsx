@@ -1,6 +1,7 @@
 import React, { memo, Suspense, useEffect, useState } from 'react'
 import LayoutStyle from './style'
-import { ConfigProvider, Layout, Menu, theme } from 'antd'
+import { ConfigProvider, Layout, Menu, theme, Switch } from 'antd'
+import { BulbFilled } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import navData from '@/assets/homepageNav.json'
 import MusicPlayer from '@/views/musicPlayer'
@@ -31,7 +32,7 @@ const Index = memo(() => {
         <Layout>
           <Header className="header">
             <div className="title">
-              <Music width={45} height={45} />
+              <Music width={30} height={30} className="musicIcon" />
               <h3>简约音乐播放器</h3>
             </div>
             <div className="options">
@@ -39,6 +40,14 @@ const Index = memo(() => {
                 <LoginModal
                   getLoginStatus={() => {
                     console.log(1)
+                  }}
+                />
+              </div>
+              <div className="lightMode">
+                <BulbFilled
+                  className="111"
+                  style={{
+                    fontSize: '22px'
                   }}
                 />
               </div>
@@ -59,7 +68,6 @@ const Index = memo(() => {
                 defaultSelectedKeys={['/discover']}
                 items={navData}
                 onClick={(obj) => {
-                  console.log('点击的对象', obj)
                   navigate(obj.key)
                 }}
               />

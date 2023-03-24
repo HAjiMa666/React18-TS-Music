@@ -14,6 +14,8 @@ const LayoutStyle = styled.div`
     justify-content: space-between;
     border-bottom: 1px solid #363636;
     .options {
+      display: flex;
+      align-items: center;
       margin-right: 64px;
     }
 
@@ -29,16 +31,28 @@ const LayoutStyle = styled.div`
       }
     }
 
+    .lightMode {
+      display: flex;
+      margin-left: 4px;
+      align-items: center;
+    }
+
     .title {
       display: flex;
       height: 100%;
       margin-left: 16px;
+      align-items: center;
+
+      .musicIcon {
+        margin-right: 6px;
+      }
 
       h3 {
         font-weight: bolder;
         display: flex;
         align-items: center;
         margin-bottom: 0px;
+        line-height: 0px;
       }
     }
   }

@@ -3,10 +3,7 @@ import type { FC, ReactNode } from 'react'
 import { Menu } from 'antd'
 import type { MenuProps } from 'antd'
 import { NavLink, Outlet } from 'react-router-dom'
-import { useAppSelector } from '@/store/hooks'
-import { shallowEqual } from 'react-redux'
 import { DiscoverStyle } from './style'
-import { useToken } from 'antd/es/theme/internal'
 interface IProps {
   children?: ReactNode
 }
@@ -37,6 +34,7 @@ const Discover: FC<IProps> = (props) => {
         mode="horizontal"
         items={items}
         defaultSelectedKeys={['/discover/recommend']}
+        className="discoverMenu"
       />
       <Suspense fallback="">
         <Outlet />

@@ -37,3 +37,12 @@ export function checkLoginStatus(cookie: string) {
     }
   })
 }
+
+export function logOut(cookie: string) {
+  return zxRequest.post({
+    url: '/logout',
+    params: {
+      cookie
+    }
+  })
+}

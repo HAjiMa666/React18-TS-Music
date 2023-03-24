@@ -15,7 +15,8 @@ import { LoginModalWrapper } from './style'
 import {
   getQRCodeKey,
   getQRCodeImg,
-  checkIsScanQRCode
+  checkIsScanQRCode,
+  logOut
 } from '../../services/personInfo'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { fetchLoginStatus } from '@/store/common'
@@ -53,7 +54,18 @@ const PersonalInfo: FC<IProps> = (props) => {
     },
     {
       key: '2',
-      label: <Button>退出登录</Button>
+      label: (
+        <Button
+          onClick={() => {
+            if (cookie)
+              logOut(cookie).then((res) => {
+                console.log('登录退出', res)
+              })
+          }}
+        >
+          退出登录
+        </Button>
+      )
     }
   ]
 
