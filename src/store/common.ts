@@ -4,7 +4,8 @@ import {
   GETSongPlayListAllSongs,
   GETSongPlayListDetails,
   SongPlayListAllSongParams,
-  SongPlayListParams
+  SongPlayListParams,
+  getSongLyric
 } from '@/services/modules/common'
 import type { SongUrlParams } from '@/services/modules/common'
 import { SongListDetails } from '@/types/recommend'
@@ -16,6 +17,7 @@ interface InitialStateProps {
   allSongs: Song[]
   songListDetails: SongListDetails | undefined
   loginStatus: any
+  lyric: any
 }
 
 const initialState: InitialStateProps = {
@@ -23,7 +25,8 @@ const initialState: InitialStateProps = {
   currentSong: '',
   allSongs: [],
   songListDetails: undefined,
-  loginStatus: ''
+  loginStatus: '',
+  lyric: null
 }
 
 export const fetchAllSongs = createAsyncThunk(
@@ -47,6 +50,15 @@ export const fetchSongUrl = createAsyncThunk(
   async (params: SongUrlParams) => {
     const res = await GETSongUrl(params)
     return res.data
+  }
+)
+
+export const fetchSongLyric = createAsyncThunk(
+  'song/lyric',
+  async (id: number) => {
+    const res = await getSongLyric(id)
+    console.log('执行', res.lrc)
+    return res.lrc.lyric
   }
 )
 
@@ -79,6 +91,9 @@ const CommonStore = createSlice({
       })
       .addCase(fetchLoginStatus.fulfilled, (state, action) => {
         state.loginStatus = action.payload
+      })
+      .addCase(fetchSongLyric.fulfilled, (state, action) => {
+        state.lyric = action.payload
       })
   }
 })

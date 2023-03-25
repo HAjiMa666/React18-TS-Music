@@ -36,3 +36,10 @@ export function GETSongUrl(params: SongUrlParams) {
     url: `/song/url/v1?id=${id}&level=${level}`
   })
 }
+
+// /lyric 获取歌曲歌词
+export function getSongLyric(id: number) {
+  return zxRequest.get({
+    url: `/lyric?id=${id}`
+  })
+}

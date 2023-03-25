@@ -4,7 +4,8 @@ import { MusicPlayerWrapper } from './style'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { changePlayState, changeSongPlayWay } from '@/views/musicPlayer/store'
 import { Slider, Typography } from 'antd'
-import { formatSongDuration } from '@/utils/tools'
+import { formatLyric, formatSongDuration } from '@/utils/tools'
+import { fetchSongLyric } from '@/store/common'
 interface IProps {
   children?: ReactNode
 }
@@ -25,21 +26,26 @@ import { shallowEqual } from 'react-redux'
 
 const MusicPlayer: FC<IProps> = () => {
   const dispatch = useAppDispatch()
-  const { songData, allSongs, playState, songPlayWay } = useAppSelector(
-    (state) => ({
-      songData: state.common.currentSong,
-      allSongs: state.common.allSongs,
-      playState: state.musicPlayer.playState,
-      songPlayWay: state.musicPlayer.songPlayWay
-    }),
-    shallowEqual
-  )
+  const { songData, allSongs, playState, songPlayWay, songLyric } =
+    useAppSelector(
+      (state) => ({
+        songData: state.common.currentSong,
+        allSongs: state.common.allSongs,
+        playState: state.musicPlayer.playState,
+        songPlayWay: state.musicPlayer.songPlayWay,
+        songLyric: state.common.lyric
+      }),
+      shallowEqual
+    )
   const musicPlayerRef = useRef<HTMLAudioElement>(null)
   useEffect(() => {
     if (musicPlayerRef.current?.src) {
       musicPlayerRef.current.play()
       dispatch(changePlayState())
     }
+  }, [songData])
+  useEffect(() => {
+    if (songData[0]?.id) dispatch(fetchSongLyric(songData[0]?.id))
   }, [songData])
   const [currentSongPlayTime, setSongPlayTime] = useState(0)
   const [dragMusicProgress, setDragMusicProgress] = useState(false)
@@ -179,6 +185,8 @@ const MusicPlayer: FC<IProps> = () => {
           )}
         </div>
       </div>
+      {songLyric && <div>{JSON.stringify(formatLyric(songLyric))}</div>}
+
       <audio
         src={songData[0]?.url}
         ref={musicPlayerRef}
