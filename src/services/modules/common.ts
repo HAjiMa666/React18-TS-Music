@@ -24,7 +24,7 @@ export function GETSongPlayListAllSongs(params: SongPlayListAllSongParams) {
 
 export function GETSongPlayListDetails(params: SongPlayListParams) {
   const { id, s = 10 } = params
-  return zxRequest.get({
+  return zxRequest.post({
     url: `/playlist/detail?id=${id}&s=${s}`
   })
 }
@@ -32,7 +32,7 @@ export function GETSongPlayListDetails(params: SongPlayListParams) {
 // /song/url 获取歌曲URL
 export function GETSongUrl(params: SongUrlParams) {
   const { id, level = 'standard' } = params
-  return zxRequest.get({
+  return zxRequest.post({
     url: `/song/url/v1?id=${id}&level=${level}`
   })
 }

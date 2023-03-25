@@ -1,5 +1,6 @@
 import axios from 'axios'
 import type { AxiosInstance } from 'axios'
+import { getLoginCookie } from '@/utils/tools'
 import type { ZXAxiosRequestConfig, ZXRequestConfig } from './type'
 
 class ZXRequest {
@@ -13,6 +14,9 @@ class ZXRequest {
     this.instance.interceptors.request.use(
       (config) => {
         console.log('全局成功回调', config)
+        config.data = {
+          cookie: getLoginCookie()
+        }
         return config
       },
       (err) => {

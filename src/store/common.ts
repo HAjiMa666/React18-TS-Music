@@ -38,7 +38,7 @@ export const fetchSongListDetails = createAsyncThunk(
   'songList/details',
   async (params: SongPlayListParams) => {
     const res = await GETSongPlayListDetails(params)
-    return res.playlist
+    return res.data.playlist
   }
 )
 

@@ -31,4 +31,10 @@ const formatSongDuration = (time: number, type: 'seconds' | 'millisecond') => {
   }
 }
 
-export { formatNum, formatIndex, formatSongDuration }
+// 获取登录的cookie
+const getLoginCookie = () => {
+  const cookie = localStorage.getItem('cookie')
+  return cookie
+}
+
+export { formatNum, formatIndex, formatSongDuration, getLoginCookie }
