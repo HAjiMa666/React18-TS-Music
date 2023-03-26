@@ -1,11 +1,12 @@
 import React, { memo, useEffect, useMemo, useRef, useState } from 'react'
 import type { FC, ReactNode } from 'react'
+import { Slider, Typography } from 'antd'
 import { MusicPlayerWrapper } from './style'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { changePlayState, changeSongPlayWay } from '@/views/musicPlayer/store'
-import { Slider, Typography } from 'antd'
 import { formatLyric, formatSongDuration } from '@/utils/tools'
 import { fetchSongLyric } from '@/store/common'
+import { useNavigate } from 'react-router-dom'
 interface IProps {
   children?: ReactNode
 }
@@ -25,6 +26,7 @@ import {
 import { shallowEqual } from 'react-redux'
 
 const MusicPlayer: FC<IProps> = () => {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { songData, allSongs, playState, songPlayWay, songLyric } =
     useAppSelector(
@@ -81,7 +83,13 @@ const MusicPlayer: FC<IProps> = () => {
           defaultValue={0}
         />
       </div>
-      <div className="cover">
+      <div
+        className="cover"
+        onClick={() => {
+          console.log('当前点击头像')
+          navigate('/musicDetails')
+        }}
+      >
         <img src={currentSongInfo?.al.picUrl} alt="" />
       </div>
       <div className="songInfo">
@@ -185,8 +193,6 @@ const MusicPlayer: FC<IProps> = () => {
           )}
         </div>
       </div>
-      {songLyric && <div>{JSON.stringify(formatLyric(songLyric))}</div>}
-
       <audio
         src={songData[0]?.url}
         ref={musicPlayerRef}
